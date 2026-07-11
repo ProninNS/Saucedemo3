@@ -1,7 +1,6 @@
 package tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -9,38 +8,38 @@ import static org.testng.Assert.assertTrue;
 
 public class LoginTest extends BaseTest {
 
-    @Test
-    public void chekLogin() {
-        loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-
-        assertEquals(productsPage.getTitle(), "Products");
+    @DataProvider(name = "incorrectLoginData")
+    public Object[][] incorrectLoginData() {
+        return new Object[][]{
+                {"", "secret_sauce", "Epic sadface: Username is required"},
+                {"standard_user", "", "Epic sadface: Password is required"},
+                {"standard_user", "dsewgw", "Epic sadface: Username and password do not match any user in this service"},
+                {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."}
+        };
     }
 
-    @Test
-    public void chekIncorrectLogin() {
-        loginPage.open();
-        loginPage.login("", "secret_sauce");
-
-        assertTrue(loginPage.isErrorDisplayed());
-        assertEquals(loginPage.getErrorText(), "Epic sadface: Username is required");
+    @DataProvider(name = "correctLoginData")
+    public Object[][] correctLoginData() {
+        return new Object[][]{
+                {"standard_user", "secret_sauce", "Products"}
+        };
     }
 
-    @Test
-    public void chekIncorrectPassword() {
+    @Test(dataProvider = "correctLoginData")
+    public void chekCorrectLogin(String user, String password, String title) {
         loginPage.open();
-        loginPage.login("standard_user", "adasd");
+        loginPage.login(user, password);
 
-        assertTrue(loginPage.isErrorDisplayed());
-        assertEquals(loginPage.getErrorText(), "Epic sadface: Username and password do not match any user in this service");
+        assertTrue(productsPage.isTitleDisplayed());
+        assertEquals(productsPage.getTitle(), title);
     }
 
-    @Test
-    public void chekBlockedUser() {
+    @Test(dataProvider = "incorrectLoginData")
+    public void chekIncorrectLogin(String user, String password, String errorMessage) {
         loginPage.open();
-        loginPage.login("locked_out_user", "secret_sauce");
+        loginPage.login(user, password);
 
         assertTrue(loginPage.isErrorDisplayed());
-        assertEquals(loginPage.getErrorText(), "Epic sadface: Sorry, this user has been locked out.");
+        assertEquals(loginPage.getErrorText(), errorMessage);
     }
 }
