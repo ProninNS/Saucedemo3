@@ -15,6 +15,8 @@ public class ProductsTest extends BaseTest {
 
         productsPage.addGoodsToCart("Sauce Labs Bolt T-Shirt");
         productsPage.addGoodsToCart(0);
+
         assertEquals(productsPage.chekCounterValue(), "rgba(226, 35, 26, 1)");
+        assertEquals(productsPage.chekGoodsCount(), "2");
     }
 }
