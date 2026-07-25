@@ -1,5 +1,6 @@
 package tests;
 
+import net.bytebuddy.build.Plugin;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -25,7 +26,7 @@ public class LoginTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "correctLoginData")
+    @Test(dataProvider = "correctLoginData", priority = 1)
     public void chekCorrectLogin(String user, String password, String title) {
         loginPage.open();
         loginPage.login(user, password);
@@ -34,7 +35,7 @@ public class LoginTest extends BaseTest {
         assertEquals(productsPage.getTitle(), title);
     }
 
-    @Test(dataProvider = "incorrectLoginData")
+    @Test(dataProvider = "incorrectLoginData", priority = 2)
     public void chekIncorrectLogin(String user, String password, String errorMessage) {
         loginPage.open();
         loginPage.login(user, password);

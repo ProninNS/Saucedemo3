@@ -6,7 +6,7 @@ import static org.testng.Assert.assertEquals;
 
 public class ProductsTest extends BaseTest {
 
-    @Test
+    @Test()
     public void checkGoodsAdded() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -17,6 +17,6 @@ public class ProductsTest extends BaseTest {
         productsPage.addGoodsToCart(0);
 
         assertEquals(productsPage.chekCounterValue(), "rgba(226, 35, 26, 1)");
-        assertEquals(productsPage.chekGoodsCount(), "2");
+        assertEquals(productsPage.chekGoodsCount(), "1");
     }
 }

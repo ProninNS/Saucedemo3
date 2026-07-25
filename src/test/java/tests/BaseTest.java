@@ -17,7 +17,7 @@ public class BaseTest {
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
-        //options.addArguments("headless");
+        options.addArguments("headless");
         driver = new ChromeDriver(options);
 
         loginPage = new LoginPage(driver);
@@ -27,7 +27,7 @@ public class BaseTest {
 
     @AfterMethod
     public void close() {
-
+        driver.manage().deleteAllCookies();
         driver.quit();
     }
 }
