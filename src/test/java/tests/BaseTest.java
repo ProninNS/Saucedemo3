@@ -27,7 +27,7 @@ public class BaseTest {
 
     @AfterMethod
     public void close() {
-
+        driver.manage().deleteAllCookies();
         driver.quit();
     }
 }

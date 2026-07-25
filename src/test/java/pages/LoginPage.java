@@ -2,6 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
     private final By loginInput = By.xpath(DATA_TEST_PATTERN.formatted("username"));
@@ -29,6 +31,7 @@ public class LoginPage extends BasePage {
     }
 
     public String getErrorText() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(error));
         return driver.findElement(error).getText();
     }
 }
