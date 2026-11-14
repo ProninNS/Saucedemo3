@@ -27,7 +27,6 @@ public class ProductsPage extends BasePage {
     }
 
     public void addGoodsToCart(int goodsIndex) {
-        By addToCart = By.xpath(ADD_TO_CART.formatted(goodsIndex));
         driver.findElements(By.xpath("//*[text()='Add to cart']")).get(goodsIndex).click();
     }
 
@@ -37,5 +36,9 @@ public class ProductsPage extends BasePage {
 
     public String chekGoodsCount() {
         return driver.findElement(counter).getText();
+    }
+
+    public void switchToBasket() {
+        driver.findElement(counter).click();
     }
 }
