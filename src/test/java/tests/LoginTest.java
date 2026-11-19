@@ -38,6 +38,7 @@ public class LoginTest extends BaseTest {
         loginPage.open();
         loginPage.login(user, password);
 
+
         assertTrue(loginPage.isErrorDisplayed());
         assertEquals(loginPage.getErrorText(), errorMessage);
     }

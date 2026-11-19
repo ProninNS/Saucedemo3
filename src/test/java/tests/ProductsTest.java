@@ -1,6 +1,8 @@
 package tests;
 
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
+
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -20,7 +22,7 @@ public class ProductsTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce");
 
         assertEquals(productsPage.getTitle(), "Products");
-        //productsPage.addGoodsToCart(5);
+        productsPage.addGoodsToCart(5);
 
         for (String goods : goodsList) {
             productsPage.addGoodsToCart(goods);
