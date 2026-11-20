@@ -24,7 +24,7 @@ public class LoginTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "correctLoginData", priority = 1)
+    @Test(dataProvider = "correctLoginData", priority = 1, enabled = true, invocationCount = 1)
     public void chekCorrectLogin(String user, String password, String title) {
         loginPage.open();
         loginPage.login(user, password);
@@ -33,7 +33,7 @@ public class LoginTest extends BaseTest {
         assertEquals(productsPage.getTitle(), title);
     }
 
-    @Test(dataProvider = "incorrectLoginData", priority = 2)
+    @Test(dataProvider = "incorrectLoginData", priority = 2, enabled = true, invocationCount = 1)
     public void chekIncorrectLogin(String user, String password, String errorMessage) {
         loginPage.open();
         loginPage.login(user, password);
