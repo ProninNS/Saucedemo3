@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BasketPage extends BasePage {
-    //private final By goodsTitle;
+    private final By goodsTitle = By.cssSelector("");
     private final By pageTitle = By.xpath("//*[@class='title']");
 
     public BasketPage(WebDriver driver) {

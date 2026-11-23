@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.annotations.Test;
+
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -20,14 +21,15 @@ public class ProductsTest extends BaseTest {
         loginPage.login("standard_user", "secret_sauce");
 
         assertEquals(productsPage.getTitle(), "Products");
+
         productsPage.addGoodsToCart(5);
 
         for (String goods : goodsList) {
             productsPage.addGoodsToCart(goods);
         }
 
-        assertEquals(productsPage.chekCounterValue(), "rgba(226, 35, 26, 1)");
-        assertEquals(productsPage.chekGoodsCount(), "3");
+        assertEquals(productsPage.chekCounterColor(), "rgba(226, 35, 26, 1)");
+        assertEquals(productsPage.chekGoodsCount(), "4");
     }
 
     @Test

@@ -8,11 +8,11 @@ import org.testng.annotations.BeforeMethod;
 import pages.BasketPage;
 import pages.LoginPage;
 import pages.ProductsPage;
+
 import java.time.Duration;
 
 public class BaseTest {
     WebDriver driver;
-
     LoginPage loginPage;
     ProductsPage productsPage;
     BasketPage basketPage;
